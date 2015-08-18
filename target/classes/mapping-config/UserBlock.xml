@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jy.domain.UserBlock" >
+  <resultMap id="BaseResultMap" type="com.jy.domain.UserBlock" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="user_blocked" property="userBlocked" jdbcType="BIGINT" />
+    <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  
+  <select id="getByUserIdAndBlockedUser" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from user_block
+    where user_id = #{userId,jdbcType=BIGINT} and user_id = #{userBlocked,jdbcType=BIGINT}
+  </select>
+  
+  <sql id="Base_Column_List" >
+    id, user_id, user_blocked, createtime
+  </sql>
+
+  <delete id="delete" parameterType="com.jy.domain.UserBlock" >
+    delete from user_block
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  
+  <insert id="create" parameterType="com.jy.domain.UserBlock" >
+    insert into user_block (id, user_id, user_blocked, 
+      createtime)
+    values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{userBlocked,jdbcType=BIGINT}, 
+      #{createtime,jdbcType=TIMESTAMP})
+  </insert>
+  
+  <update id="update" parameterType="com.jy.domain.UserBlock" >
+    update user_block
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="userBlocked != null" >
+        user_blocked = #{userBlocked,jdbcType=BIGINT},
+      </if>
+      <if test="createtime != null" >
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+</mapper>

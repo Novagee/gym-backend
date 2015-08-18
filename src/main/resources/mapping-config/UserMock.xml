@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jy.domain.UserMock">
+
+	<resultMap id="BaseResultMap" type="com.jy.domain.UserMock">
+		<id column="mid" property="id" jdbcType="INTEGER" />
+		<result column="user_id" property="userVO.id" jdbcType="BIGINT" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="enabled" property="enabled" jdbcType="TINYINT" />
+		
+		<result column="name" jdbcType="VARCHAR" property="userVO.name" />
+	    <result column="device_token" jdbcType="VARCHAR" property="userVO.deviceToken" />
+	    <result column="device_type" jdbcType="VARCHAR" property="userVO.deviceType" />
+	    <result column="gender" jdbcType="CHAR" property="userVO.gender" />
+	    <result column="interestIn" jdbcType="CHAR" property="userVO.interestIn" />
+	    <result column="likes" jdbcType="INTEGER" property="userVO.likes" />
+	    <result column="lastlogintime" jdbcType="TIMESTAMP" property="userVO.lastlogintime" />
+	    <result column="createtime" jdbcType="TIMESTAMP" property="userVO.createtime" />
+	    <result column="pic" jdbcType="VARCHAR" property="userVO.pic" />
+	    <result column="pic_width" jdbcType="INTEGER" property="userVO.picWidth" />
+	    <result column="pic_height" jdbcType="INTEGER" property="userVO.picHeight" />
+	    <result column="age_id" jdbcType="INTEGER" property="userVO.ageId" />
+	    <result column="uuid" jdbcType="VARCHAR" property="userVO.uuid" />
+	    <result column="city_id" jdbcType="INTEGER" property="userVO.cityId" />
+    	<result column="lat" property="userVO.lat" jdbcType="DOUBLE" />
+    	<result column="lng" property="userVO.lng" jdbcType="DOUBLE" />
+	</resultMap>
+	
+	
+	<resultMap id="BaseMessageResultMap" type="com.jy.domain.Message" >
+	    <id column="id" property="id" jdbcType="BIGINT" />
+	    <result column="sender_id" property="senderId" jdbcType="BIGINT" />
+	    <result column="sender_pic" property="senderPic" jdbcType="VARCHAR" />
+	    <result column="sender_pic_width" jdbcType="INTEGER" property="senderPicWidth" />
+	    <result column="sender_pic_height" jdbcType="INTEGER" property="senderPicHeight" />
+	    <result column="receiver_id" property="receiverId" jdbcType="BIGINT" />
+	    <result column="msg" property="msg" jdbcType="VARCHAR" />
+	    <result column="msg_type" property="msgType" jdbcType="VARCHAR" />
+	    <result column="msg_status" property="msgStatus" jdbcType="VARCHAR" />
+	    <result column="is_read" property="isRead" jdbcType="BIT" />
+	    <result column="is_deleted" property="isDeleted" jdbcType="BIT" />
+	    <result column="is_replied" property="isReplied" jdbcType="BIT" />
+	    <result column="sendtime" property="sendtime" jdbcType="TIMESTAMP" />
+	    <result column="readtime" property="readtime" jdbcType="TIMESTAMP" />
+  	</resultMap>
+  
+  	<resultMap id="FullMessageResultMap" type="com.jy.domain.rest.MessageDetailVO" extends="BaseMessageResultMap">
+    	<result column="isFriend" property="isFriend" jdbcType="BIT" />
+    	<result column="senderName" property="senderName" jdbcType="VARCHAR" />
+    	<result column="receiverName" property="receiverName" jdbcType="VARCHAR" />
+    	<result column="receiverPic" property="receiverPic" jdbcType="VARCHAR" />
+  	</resultMap>
+	
+	<sql id="Base_Column_List">
+		id, user_id, create_time, enabled
+	</sql>
+	
+	<select id="findById" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from user_mock
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	
+	<select id="getAllMocks" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+		select
+		m.id as mid, m.user_id as user_id, create_time, m.enabled as menabled,
+		name, device_token, device_type, gender, interestIn, likes, lastlogintime, createtime, pic, pic_width, pic_height, age_id, 
+    	uuid, city_id,lat, lng, updatetime
+		from user_mock m 
+		left outer join user u on m.user_id = u.id
+		left outer join user_location ul on u.id = ul.user_id
+	</select>
+	
+	<select id="getMockByUserId" resultMap="BaseResultMap">
+		select
+		u.id as user_id,
+		name, device_token, device_type, gender, interestIn, likes, lastlogintime, createtime, pic, pic_width, pic_height, age_id, 
+    	uuid, city_id,lat, lng, updatetime
+		from user_mock m
+		left outer join user u on m.user_id = u.id
+		left outer join user_location ul on u.id = ul.user_id
+		where u.id = #{userId,jdbcType=BIGINT}
+	</select>
+	
+	<select id="getAllMockMessages" resultMap="FullMessageResultMap" >
+	    select 
+	    m.id, 
+	    sender_id, sender.name as senderName, sender_pic, sender_pic_width, sender_pic_height, 
+	    receiver_id, receiver.name as receiverName, receiver.pic as receiverPic,
+	    msg, msg_type, msg_status, is_read, is_deleted, 
+	    is_replied, sendtime, readtime
+	    from message m
+		left outer join `user` sender on m.sender_id = sender.id
+		left outer join `user` receiver on m.receiver_id = receiver.id
+	    where
+	    (
+	    	sender_id in (select user_id from user_mock)
+	    	or
+	    	receiver_id in (select user_id from user_mock)
+	    )
+	    order by is_deleted asc, sendtime desc 
+  	</select>
+	
+	<delete id="delete" parameterType="com.jy.domain.UserMock">
+		delete from user_mock
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+	
+	<insert id="create" parameterType="com.jy.domain.UserMock">
+		insert into user_mock (id,
+		user_id, create_time,
+		enabled)
+		values (#{id,jdbcType=INTEGER},
+		#{userId,jdbcType=BIGINT},
+		#{createTime,jdbcType=TIMESTAMP},
+		#{enabled,jdbcType=TINYINT})
+	</insert>
+	
+	<update id="update" parameterType="com.jy.domain.UserMock">
+		update user_mock
+		<set>
+			<if test="userId != null">
+				user_id = #{userId,jdbcType=BIGINT},
+			</if>
+			<if test="createTime != null">
+				create_time = #{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="enabled != null">
+				enabled = #{enabled,jdbcType=TINYINT},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	
+</mapper>

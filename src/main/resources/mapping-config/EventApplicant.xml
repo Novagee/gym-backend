@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jy.domain.EventApplicant">
+
+  <resultMap id="BaseResultMap" type="com.jy.domain.EventApplicant">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="event_id" jdbcType="BIGINT" property="eventId" />
+    <result column="mobile" jdbcType="VARCHAR" property="mobile" />
+    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+  </resultMap>
+  
+  <sql id="Base_Column_List">
+    id, user_id, event_id, mobile, createtime
+  </sql>
+  
+  <select id="getByEventId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from event_applicant
+    where event_id = #{eventId,jdbcType=BIGINT}
+  </select>
+  
+  <select id="getByMyAppliedEvents" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from event_applicant
+    where user_id = #{userId,jdbcType=BIGINT}
+    group by event_id
+  </select>
+  
+  <insert id="create" parameterType="com.jy.domain.EventApplicant" useGeneratedKeys="true" keyProperty="id">
+    insert into event_applicant (id, user_id, event_id, mobile, createtime)
+    values (
+    	#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{eventId,jdbcType=BIGINT}, 
+   		#{mobile,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP})
+  </insert>
+
+</mapper>
