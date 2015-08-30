@@ -8,10 +8,25 @@ public class Event extends AbstractDomainObject{
     private Long id;
     private String title;
     private String description;
-    private Date starttime;
-    private Date endtime;
+    private	String address;
+    private String fee;
+    private String starttime;
+    private String endtime;
     private Boolean isActive;
     private String pic;
+    
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	public String getFee() {
+		return fee;
+	}
+	public void setFee(String fee) {
+		this.fee = fee;
+	}
 	public Long getId() {
 		return id;
 	}
@@ -30,16 +45,16 @@ public class Event extends AbstractDomainObject{
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public Date getStarttime() {
+	public String getStarttime() {
 		return starttime;
 	}
-	public void setStarttime(Date starttime) {
+	public void setStarttime(String starttime) {
 		this.starttime = starttime;
 	}
-	public Date getEndtime() {
+	public String getEndtime() {
 		return endtime;
 	}
-	public void setEndtime(Date endtime) {
+	public void setEndtime(String endtime) {
 		this.endtime = endtime;
 	}
 	public Boolean getIsActive() {

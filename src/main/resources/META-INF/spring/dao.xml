@@ -155,4 +155,23 @@
 		</property>
 	</bean>
 	
+	<bean id="complaintDao" parent="abstractDao">
+		<property name="proxyInterfaces">
+			<list>
+				<value>
+					com.jy.dao.ComplaintDao
+				</value>
+			</list>
+		</property>
+		<property name="target">
+			<bean parent="abstractDaoTarget">
+				<constructor-arg>
+					<value>
+						com.jy.domain.Complaint
+					</value>
+				</constructor-arg>
+			</bean>
+		</property>
+	</bean>
+	
 </beans>

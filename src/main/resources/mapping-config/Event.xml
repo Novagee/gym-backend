@@ -6,14 +6,16 @@
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="title" jdbcType="VARCHAR" property="title" />
     <result column="description" jdbcType="VARCHAR" property="description" />
-    <result column="starttime" jdbcType="TIMESTAMP" property="starttime" />
-    <result column="endtime" jdbcType="TIMESTAMP" property="endtime" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="fee" jdbcType="VARCHAR" property="fee" />
+    <result column="starttime" jdbcType="VARCHAR" property="starttime" />
+    <result column="endtime" jdbcType="VARCHAR" property="endtime" />
     <result column="pic" jdbcType="VARCHAR" property="pic" />
     <result column="isActive" jdbcType="BIT" property="isActive" />
   </resultMap>
   
   <sql id="Base_Column_List">
-    id, title, description, starttime, endtime, pic, isActive
+    id, title, description, address, fee, starttime, endtime, pic, isActive
   </sql>
   
   <select id="getById" parameterType="java.lang.Long" resultMap="BaseResultMap">
@@ -30,10 +32,10 @@
   </select>
   
   <insert id="create" parameterType="com.jy.domain.Event" useGeneratedKeys="true" keyProperty="id">
-    insert into event (id, title, description, starttime, endtime, pic, isActive)
+    insert into event (id, title, description, address, fee, starttime, endtime, pic, isActive)
     values (
-    	#{id,jdbcType=BIGINT}, #{title,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
-   		#{starttime,jdbcType=TIMESTAMP}, #{endtime,jdbcType=TIMESTAMP},
+    	#{id,jdbcType=BIGINT}, #{title,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{fee,jdbcType=VARCHAR}, 
+   		#{starttime,jdbcType=VARCHAR}, #{endtime,jdbcType=VARCHAR},
    		#{pic,jdbcType=VARCHAR}, #{isActive,jdbcType=BIT})
   </insert>
 

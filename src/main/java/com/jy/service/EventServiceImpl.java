@@ -39,12 +39,12 @@ public class EventServiceImpl implements EventService{
 			event.setTitle(title);
 			event.setDescription(description);
 			event.setIsActive(true);
-			if(starttime>0){
-				event.setStarttime(new Date(starttime));
-			}
-			if(endtime>0){
-				event.setEndtime(new Date(endtime));
-			}
+//			if(starttime>0){
+//				event.setStarttime(new Date(starttime));
+//			}
+//			if(endtime>0){
+//				event.setEndtime(new Date(endtime));
+//			}
 			String fileName = "";
 			if (null != file) {
 				fileName = file.getOriginalFilename();

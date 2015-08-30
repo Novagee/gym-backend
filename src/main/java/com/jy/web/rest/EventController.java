@@ -142,10 +142,10 @@ public class EventController{
 	@RequestMapping(value="/{eventId}/apply", method = RequestMethod.POST)
 	public @ResponseBody JsonResponse applyForEvent(@PathVariable("eventId") Long eventId, HttpServletRequest request) {
 		try {
-			String uuid = request.getParameter("uuid");
+//			String uuid = request.getParameter("uuid");
 			String mobile = request.getParameter("mobile");
-			User user = userFormValidator.validateSecurity(uuid);
-			eventService.applyForEvent(eventId, user.getId(), mobile);
+//			User user = userFormValidator.validateSecurity(uuid);
+			eventService.applyForEvent(eventId, 0L , mobile);
 			return new JsonResponse(JsonResponseACK.Success.name(), DateUtils.switchNowToString());
 		} catch (NumberFormatException e) {
 			logger.error(e.getMessage());

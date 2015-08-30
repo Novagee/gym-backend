@@ -108,6 +108,10 @@ public enum UploadUtils {
 		return getProperties().getProperty("homepage.http.path");
 	}
 	
+	public  String getComplaintEnable(){
+		return getProperties().getProperty("complaint.enable");
+	}
+	
 	private  Properties getProperties(){
 		if(properties==null){
 			try {
