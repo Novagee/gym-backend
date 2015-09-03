@@ -68,6 +68,12 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
     
+    <style type="text/css">
+#weixin-tip{display:none;position:fixed;left:0;top:0;background:rgba(0,0,0,0.8);filter:alpha(opacity=80);width:100%;height:100%;z-index:100;}
+#weixin-tip p{text-align:center;margin-top:40%;padding:0 5%;position:relative;}
+#weixin-tip p img{max-width: 100%; height: auto;}
+#weixin-tip .close{color:#fff;padding:5px;font:bold 20px/24px simsun;text-shadow:0 1px 0 #ddd;position:absolute;top:0;left:5%;}
+</style>
 
 </head>
 
@@ -93,7 +99,7 @@
                     <a class="navbar-brand" href="#header"><!-- SCROLLS TO TOP OF THE PAGE -->
                         
                         <!--PLACE URL OF YOUR LOGO BELOW-->
-                        <img src="img/logo.png" width=50>
+                        <img src="img/logo.png" height=50>
                         
                     </a>
                     
@@ -153,7 +159,7 @@
                       <div class="header-margin"></div>
                       
                       <!-- HEADER TEXT -->
-                      <header class="anim-bounce-up">
+                      <header class="anim-bounce-up" style="padding-left:50px">
                           
                           <!-- HEADER TITLE -->
                           <h1>
@@ -164,33 +170,33 @@
                               <span class="header-txt-small">&nbsp;</span><br/>
                               
                               <!-- REGULAR TITLE -->
-                              <span class="header-txt-color">爱动</span>
+                              <span class="header-txt-color" style="color:#cf162d">爱动</span>
 
                           </h1>
                           
                           <!-- SUBTITLE -->
-                          <h3>分享生活,从爱动开始!</h3>
+                          <h3><span style="color:#666666; line-height:150%">分享生活，从爱动开始！</span></h3>
                           
                       </header>
                       
                       <!-- HEADER BUTTONS -->
-                      <div class="buttons-cont">
+                      <div class="buttons-cont" style="padding-left:50px">
                           
                           <!-- DOWNLOAD BUTTON -->
                           <div class="btn btn-lg btn-success anim-bounce-left">
-                            <a href="#">
+                            <a href="#" style=" font-size:1.2em">
                                 
                                 <!-- ICON -->
                                 <span class="elegant icon_cloud-download_alt"></span>
                                 
                                 <!-- BUTTON TEXT -->
-                                下载
+                                <a href="#" class="download">立即下载</a>
                                 
                             </a>
                           </div>
                           
                       </div>
-                      
+                      <div id="weixin-tip"><p><img src="img/live_weixin.png" alt="微信打开"/><span id="close" title="关闭" class="close">×</span></p></div>
                   </div>
                   
                   <!-- HEADER CONTENT RIGHT -->
@@ -267,7 +273,8 @@
                       <!-- OFFER FEATURES -->
                       <div class="offer-features">
                       	  <span class="icon_4"></span>
-                          <p>用图片,文字随时随地分享你的生活。</p>
+                          <h4 style="font-size:16px; text-align:center; margin-bottom:0px">共享朋友圈</h4>
+                          <p>让你的世界将变得丰富多彩</p>
                       </div>
                       
                       
@@ -281,7 +288,8 @@
                       <!-- OFFER FEATURES -->
                       <div class="offer-features">
                       	  <span class="icon_5"></span>
-                          <p>对感兴趣的人,一键私聊,让搭讪变得更自然。</p>
+                          <h4 style="font-size:16px; text-align:center; margin-bottom:0px">线上活动平台</h4>
+                          <p>线上轻松相约，同城聚会更简单</p>
                       </div>
                       
                   </div>
@@ -293,7 +301,8 @@
                       <!-- OFFER FEATURES -->
                       <div class="offer-features">
                       	  <span class="icon_6"></span>
-                          <p>对感兴趣的人,一键私聊,让搭讪变得更自然。</p>
+                          <h4 style="font-size:16px; text-align:center; margin-bottom:0px">好友无限制</h4>
+                          <p>生活不再单调，人生不再错过</p>
                       </div>
 
                   </div>
@@ -306,8 +315,70 @@
     </section>
     
     
+    <section id="pro">
+    
+      <div class="pro-cont bg-grey pro-to-right">
+          <div class="container">
+              <div class="row">
+                
+                <!-- ABOUT TEXT SECTION -->
+                <div class="col-md-6">
+                  
+                  <!-- ABOUT TITLE -->
+                  <h3 class="anim-from-left">公开的朋友圈 就是那么爱炫</h3>
+                  <!-- ABOUT DESCRIPTION -->
+                  <p class="anim-from-left">用图片，文字随时随地分享生活</p>
+                  <p class="anim-from-left">没有朋友圈限制，世界那么大，带着爱动一起high</p>
+                  <p class="anim-from-left">让更多的人发现你的精彩，让你的朋友圈热到发烧</p>
+                  
+                </div>
+                
+                <!-- ABOUT IMAGE -->
+                <div class="col-md-6 pro-img">
+                  
+                    <!-- PLACE YOUR ABOUT IMAGE BELOW -->
+                    <img src="img/about/01.png" class="anim-from-right" alt>
+                      
+                </div>
+                
+              </div>
+          </div>
+      </div>
+      
+    </section>
     
     
+    <section id="about">
+    
+      <div class="about-cont">
+          <div class="container">
+              <div class="row">
+                
+                <!-- ABOUT IMAGE -->
+                <div class="col-md-6 about-img">
+                  
+                    <!-- PLACE YOUR ABOUT IMAGE BELOW -->
+                    <img src="img/about/03.png" class="anim-from-left" alt>
+                      
+                </div>
+                
+                <!-- ABOUT TEXT SECTION -->
+                <div class="col-md-6">
+                  
+                  <!-- ABOUT TITLE -->
+                  <h3 class="anim-from-right">全都是好友，女神男神就在你碗里</h3>
+                  <!-- ABOUT DESCRIPTION -->
+                  <p class="anim-from-right">生活不再单调，人生不再错过 </p>
+                  <p class="anim-from-right">一起玩，一起耍，一起嗨到家</p>
+                  <p class="anim-from-right">人人都是好友，让搭讪来得更自然 </p>
+
+                </div>
+                
+              </div>
+          </div>
+      </div>
+      
+    </section>
     
     <section id="pro">
     
@@ -319,10 +390,14 @@
                 <div class="col-md-6">
                   
                   <!-- ABOUT TITLE -->
-                  <h3 class="anim-from-left">报名各类丰富多彩的活动,就来爱动!</h3>
+                  <h3 class="anim-from-left">一键报名 想约就约</h3>
                   
                   <!-- ABOUT DESCRIPTION -->
-                  <p class="anim-from-left">爱动活动平台,发布,报名活动方便快捷,让你认识跟多志趣相投的朋友,打造属于你的圈子</p>
+                  <p class="anim-from-left">便捷的活动平台</p>
+                  <p class="anim-from-left">发布，报名管理活动就是那么轻松</p>
+                  <p class="anim-from-left">提前遇到跟你?一起参加活动的小伙伴</p>
+                  <p class="anim-from-left">线上聊一聊，线下一起聚，让活动不再尴尬</p>
+                  <p class="anim-from-left">让你认识更多志趣相投的朋友，打造属于你的圈子</p>
                   
                 </div>
                 
@@ -330,7 +405,7 @@
                 <div class="col-md-6 pro-img">
                   
                     <!-- PLACE YOUR ABOUT IMAGE BELOW -->
-                    <img src="img/about/01.png" class="anim-from-right" alt>
+                    <img src="img/about/04.png" class="anim-from-right" alt>
                       
                 </div>
                 
@@ -502,6 +577,33 @@
     <!--CUSTOM THEME SCRIPTS & SETTINGS -->
     <script type="text/javascript" src="js/alive.scripts.js"></script>
 
+	<script type="text/javascript">
+	var u = navigator.userAgent, app = navigator.appVersion;
+	var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //android终端或者uc浏览器
+	var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+	$(".download").click(function(){
+		var $winHeight = $(window).height();
+		var isWeixin = false;
+		var ua = navigator.userAgent.toLowerCase();
+		if (ua.match(/MicroMessenger/i) == "micromessenger") {
+			isWeixin = true;
+		}
+		if(isWeixin){
+			$('#weixin-tip').css("height",$winHeight);
+			$('#weixin-tip').show();
+		}else if(isiOS){
+			window.location.href="https://itunes.apple.com/us/app/ai-dong++/id1032938525?ls=1&mt=8";
+		}else{
+			window.location.href="img/aidong.apk";
+		}
+	});
+	$('#close').click(function(){
+		$('#weixin-tip').hide();
+	});
+	$('#weixin-tip').click(function(){
+		$('#weixin-tip').hide();
+	});
+	</script>
 
 </body>
 
