@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jy.domain.Device">
+
+  <resultMap id="BaseResultMap" type="com.jy.domain.Device">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="user_id" jdbcType="VARCHAR" property="userId" />
+    <result column="udid" jdbcType="VARCHAR" property="udid" />
+    <result column="isDisable" jdbcType="BIT" property="isDisable" />
+    <result column="createtime" jdbcType="VARCHAR" property="isDisable" />
+  </resultMap>
+  
+  <sql id="Base_Column_List">
+    id, user_id, udid, isDisable, createtime
+  </sql>
+  
+  <select id="getAllDevices" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from device
+  </select>
+  
+  <select id="getUserDevice" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from device
+    where user_id  #{userId,jdbcType=VARCHAR}
+  </select>
+  
+  
+  
+  <insert id="create" parameterType="com.jy.domain.Device" useGeneratedKeys="true" keyProperty="id">
+    insert into event (id, user_id, udid, isDisable, createtime)
+    values (
+    	#{id,jdbcType=BIGINT}, #{user_id,jdbcType=VARCHAR}, #{udid,jdbcType=VARCHAR}, 
+    	#{isDisable,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}
+   		)
+  </insert>
+
+</mapper>

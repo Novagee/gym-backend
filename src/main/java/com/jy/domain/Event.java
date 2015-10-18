@@ -1,7 +1,5 @@
 package com.jy.domain;
 
-import java.util.Date;
-
 import com.jy.dataaccess.dao.AbstractDomainObject;
 
 public class Event extends AbstractDomainObject{
@@ -14,6 +12,7 @@ public class Event extends AbstractDomainObject{
     private String endtime;
     private Boolean isActive;
     private String pic;
+    private String pplCount;
     
 	public String getAddress() {
 		return address;
@@ -68,6 +67,12 @@ public class Event extends AbstractDomainObject{
 	}
 	public void setPic(String pic) {
 		this.pic = pic;
+	}
+	public String getPplCount() {
+		return pplCount;
+	}
+	public void setPplCount(String pplCount) {
+		this.pplCount = pplCount;
 	}
     
     

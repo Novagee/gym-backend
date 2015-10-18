@@ -9,5 +9,5 @@ import com.jy.domain.EventApplicant;
 
 public interface EventApplicantDao extends GenericDao<EventApplicant>{
 	List<EventApplicant> getByEventId(@Param("eventId") Long eventId);
-	List<EventApplicant> getByMyAppliedEvents(@Param("userId") Long userId);
+	List<EventApplicant> getByMyAppliedEvents(@Param("userId") String userId);
 }

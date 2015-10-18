@@ -4,7 +4,7 @@
 
   <resultMap id="BaseResultMap" type="com.jy.domain.EventApplicant">
     <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="user_id" jdbcType="VARCHAR" property="userId" />
     <result column="event_id" jdbcType="BIGINT" property="eventId" />
     <result column="mobile" jdbcType="VARCHAR" property="mobile" />
     <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
@@ -25,7 +25,7 @@
     select 
     <include refid="Base_Column_List" />
     from event_applicant
-    where user_id = #{userId,jdbcType=BIGINT}
+    where user_id = #{userId,jdbcType=VARCHAR}
     group by event_id
   </select>
   

@@ -1,7 +1,6 @@
 package com.jy.web.rest;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -19,7 +18,6 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.jy.domain.Event;
 import com.jy.domain.EventApplicant;
-import com.jy.domain.User;
 import com.jy.domain.rest.EventVO;
 import com.jy.exception.InvalidAttributesException;
 import com.jy.service.EventService;
@@ -48,10 +46,10 @@ public class EventController{
 	public @ResponseBody JsonResponse getEvents(HttpServletRequest request) {
 		try {
 			List<Event> events = eventService.getAllEvents();
-			if(StringUtils.hasLength(request.getParameter("uuid"))){
-				User user = userFormValidator.validateSecurity(request.getParameter("uuid"));
+			if(StringUtils.hasLength(request.getParameter("userId"))){
+				String userId = request.getParameter("userId");
 				List<EventVO> eventList = new ArrayList<EventVO>();
-				List<EventApplicant> eas = eventService.getByMyAppliedEvents(user.getId());
+				List<EventApplicant> eas = eventService.getByMyAppliedEvents(userId);
 				for (Event event : events) {
 					EventVO vo = new EventVO();
 					vo.setId(event.getId());
@@ -108,12 +106,11 @@ public class EventController{
 			String title = request.getParameter("title");
 			String description = request.getParameter("description");
 			String starttime = request.getParameter("starttime");
-			String endtime = request.getParameter("endtime");
+			String address = request.getParameter("address");
+			String fee = request.getParameter("fee");
+			String pplCount = request.getParameter("pplCount");
 			if (starttime.indexOf(".")!=-1) {
 				starttime = starttime.substring(0, starttime.indexOf("."));
-			}
-			if (endtime.indexOf(".")!=-1) {
-				endtime = endtime.substring(0, endtime.indexOf("."));
 			}
 			MultipartHttpServletRequest multiRequest = (MultipartHttpServletRequest) request;
 			Map<?, MultipartFile> files = multiRequest.getFileMap();
@@ -124,7 +121,7 @@ public class EventController{
 					break;
 				}
 			}
-			eventService.createEvent(title, description, Long.parseLong(starttime), Long.parseLong(endtime), file);
+			eventService.createEvent(title, description, Long.parseLong(starttime),address, fee, pplCount, file);
 			return new JsonResponse(JsonResponseACK.Success.name(), DateUtils.switchNowToString());
 		} catch (NumberFormatException e) {
 			logger.error(e.getMessage());
@@ -145,7 +142,7 @@ public class EventController{
 //			String uuid = request.getParameter("uuid");
 			String mobile = request.getParameter("mobile");
 //			User user = userFormValidator.validateSecurity(uuid);
-			eventService.applyForEvent(eventId, 0L , mobile);
+			eventService.applyForEvent(eventId, "" , mobile);
 			return new JsonResponse(JsonResponseACK.Success.name(), DateUtils.switchNowToString());
 		} catch (NumberFormatException e) {
 			logger.error(e.getMessage());

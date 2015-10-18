@@ -4,12 +4,12 @@ import java.util.Date;
 
 import com.jy.dataaccess.dao.AbstractDomainObject;
 
-public class EventApplicant extends AbstractDomainObject{
+public class Device extends AbstractDomainObject{
     private Long id;
     private String userId;
-    private Long eventId;
-    private String mobile;
+    private String udid;
     private Date createtime;
+    private Boolean isDisable;
     
 	public Long getId() {
 		return id;
@@ -23,11 +23,11 @@ public class EventApplicant extends AbstractDomainObject{
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
-	public Long getEventId() {
-		return eventId;
+	public String getUdid() {
+		return udid;
 	}
-	public void setEventId(Long eventId) {
-		this.eventId = eventId;
+	public void setUdid(String udid) {
+		this.udid = udid;
 	}
 	public Date getCreatetime() {
 		return createtime;
@@ -35,12 +35,13 @@ public class EventApplicant extends AbstractDomainObject{
 	public void setCreatetime(Date createtime) {
 		this.createtime = createtime;
 	}
-	public String getMobile() {
-		return mobile;
+	public Boolean getIsDisable() {
+		return isDisable;
 	}
-	public void setMobile(String mobile) {
-		this.mobile = mobile;
-	}
-    
-    
+	public void setIsDisable(Boolean isDisable) {
+		this.isDisable = isDisable;
+	} 
+	
+	
+
 }

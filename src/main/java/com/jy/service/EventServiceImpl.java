@@ -27,7 +27,7 @@ public class EventServiceImpl implements EventService{
 	
 	@Override
 	public void createEvent(String title, String description, Long starttime,
-			Long endtime, MultipartFile file) throws InvalidAttributesException {
+			String address, String fee, String pplCount, MultipartFile file) throws InvalidAttributesException {
 		try {
 			if(!StringUtils.hasLength(title)){
 				throw new InvalidAttributesException("Invalid parameter - title"); 
@@ -39,12 +39,9 @@ public class EventServiceImpl implements EventService{
 			event.setTitle(title);
 			event.setDescription(description);
 			event.setIsActive(true);
-//			if(starttime>0){
-//				event.setStarttime(new Date(starttime));
-//			}
-//			if(endtime>0){
-//				event.setEndtime(new Date(endtime));
-//			}
+			event.setFee(fee);
+			event.setAddress(address);
+			event.setPplCount(pplCount);
 			String fileName = "";
 			if (null != file) {
 				fileName = file.getOriginalFilename();
@@ -63,7 +60,7 @@ public class EventServiceImpl implements EventService{
 	}
 
 	@Override
-	public void applyForEvent(Long eventId, Long userId, String mobile)
+	public void applyForEvent(Long eventId, String userId, String mobile)
 			throws InvalidAttributesException {
 		try {
 			if(null == eventId){
@@ -101,9 +98,9 @@ public class EventServiceImpl implements EventService{
 	}
 
 	@Override
-	public List<EventApplicant> getByMyAppliedEvents(Long userId) {
+	public List<EventApplicant> getByMyAppliedEvents(String userId) {
 		// TODO Auto-generated method stub
-		if(userId == null){
+		if(!StringUtils.hasLength(userId)){
 			throw new InvalidAttributesException("Invalid parameter - userId"); 
 		}
 		return eventApplicantDao.getByMyAppliedEvents(userId);

@@ -14,11 +14,11 @@ import com.jy.exception.InvalidAttributesException;
 @Service
 public interface EventService {
 	
-	public void createEvent(String title, String description, Long starttime, Long endtime, MultipartFile file) throws InvalidAttributesException;
-	public void applyForEvent(Long eventId, Long userId, String mobile) throws InvalidAttributesException;
+	public void createEvent(String title, String description, Long starttime, String address, String fee, String pplCount, MultipartFile file) throws InvalidAttributesException;
+	public void applyForEvent(Long eventId, String userId, String mobile) throws InvalidAttributesException;
 	
 	public List<Event> getAllEvents();
 	public List<EventApplicant> getByEventId(@Param("eventId") Long eventId);
-	public List<EventApplicant> getByMyAppliedEvents(@Param("userId") Long userId);
+	public List<EventApplicant> getByMyAppliedEvents(@Param("userId") String userId);
 	
 }

@@ -11,11 +11,12 @@
     <result column="starttime" jdbcType="VARCHAR" property="starttime" />
     <result column="endtime" jdbcType="VARCHAR" property="endtime" />
     <result column="pic" jdbcType="VARCHAR" property="pic" />
+    <result column="pplCount" jdbcType="VARCHAR" property="pplCount" />
     <result column="isActive" jdbcType="BIT" property="isActive" />
   </resultMap>
   
   <sql id="Base_Column_List">
-    id, title, description, address, fee, starttime, endtime, pic, isActive
+    id, title, description, address, fee, starttime, endtime, pic, isActive, pplCount
   </sql>
   
   <select id="getById" parameterType="java.lang.Long" resultMap="BaseResultMap">
@@ -32,11 +33,12 @@
   </select>
   
   <insert id="create" parameterType="com.jy.domain.Event" useGeneratedKeys="true" keyProperty="id">
-    insert into event (id, title, description, address, fee, starttime, endtime, pic, isActive)
+    insert into event (id, title, description, address, fee, starttime, endtime, pic, isActive, pplCount)
     values (
     	#{id,jdbcType=BIGINT}, #{title,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{fee,jdbcType=VARCHAR}, 
    		#{starttime,jdbcType=VARCHAR}, #{endtime,jdbcType=VARCHAR},
-   		#{pic,jdbcType=VARCHAR}, #{isActive,jdbcType=BIT})
+   		#{pic,jdbcType=VARCHAR}, #{isActive,jdbcType=BIT}, #{pplCount,jdbcType=VARCHAR}
+   		)
   </insert>
 
 </mapper>
