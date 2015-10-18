@@ -1,14 +1,17 @@
 package com.jy.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.jy.dao.DeviceDao;
 import com.jy.domain.Device;
 import com.jy.exception.InvalidAttributesException;
 import com.jy.utils.StringUtils;
 
+@Service
 public class DeviceServiceImpl implements DeviceService{
 
 	@Autowired
@@ -28,6 +31,8 @@ public class DeviceServiceImpl implements DeviceService{
 			Device device = new Device();
 			device.setUserId(userId);
 			device.setUdid(udid);
+			device.setIsDisable(false);
+			device.setCreatetime(new Date());
 			deviceDao.create(device);
 		} catch (Exception e) {
 			e.printStackTrace();

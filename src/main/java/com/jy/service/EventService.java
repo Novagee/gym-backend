@@ -14,7 +14,7 @@ import com.jy.exception.InvalidAttributesException;
 @Service
 public interface EventService {
 	
-	public void createEvent(String title, String description, Long starttime, String address, String fee, String pplCount, MultipartFile file) throws InvalidAttributesException;
+	public void createEvent(String title, String description, String starttime, String address, String fee, String pplCount, MultipartFile file) throws InvalidAttributesException;
 	public void applyForEvent(Long eventId, String userId, String mobile) throws InvalidAttributesException;
 	
 	public List<Event> getAllEvents();

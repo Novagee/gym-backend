@@ -26,7 +26,7 @@ public class EventServiceImpl implements EventService{
 	private EventApplicantDao eventApplicantDao;
 	
 	@Override
-	public void createEvent(String title, String description, Long starttime,
+	public void createEvent(String title, String description, String starttime,
 			String address, String fee, String pplCount, MultipartFile file) throws InvalidAttributesException {
 		try {
 			if(!StringUtils.hasLength(title)){
@@ -42,6 +42,7 @@ public class EventServiceImpl implements EventService{
 			event.setFee(fee);
 			event.setAddress(address);
 			event.setPplCount(pplCount);
+			event.setStarttime(starttime);
 			String fileName = "";
 			if (null != file) {
 				fileName = file.getOriginalFilename();

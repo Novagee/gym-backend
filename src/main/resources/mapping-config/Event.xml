@@ -30,6 +30,7 @@
     select 
     <include refid="Base_Column_List" />
     from event
+    where isActive = 1
   </select>
   
   <insert id="create" parameterType="com.jy.domain.Event" useGeneratedKeys="true" keyProperty="id">

@@ -7,14 +7,14 @@
     <result column="user_id" jdbcType="VARCHAR" property="userId" />
     <result column="udid" jdbcType="VARCHAR" property="udid" />
     <result column="isDisable" jdbcType="BIT" property="isDisable" />
-    <result column="createtime" jdbcType="VARCHAR" property="isDisable" />
+    <result column="createtime" jdbcType="VARCHAR" property="createtime" />
   </resultMap>
   
   <sql id="Base_Column_List">
     id, user_id, udid, isDisable, createtime
   </sql>
   
-  <select id="getAllDevices" parameterType="java.lang.Long" resultMap="BaseResultMap">
+  <select id="getAllDevices" parameterType="java.lang.Long" resultMap="BaseResultMap">d
     select 
     <include refid="Base_Column_List" />
     from device
@@ -24,17 +24,39 @@
     select 
     <include refid="Base_Column_List" />
     from device
-    where user_id  #{userId,jdbcType=VARCHAR}
+    where user_id = #{userId,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="getBlackList" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from device
+    where isDisable = 1
   </select>
   
   
-  
   <insert id="create" parameterType="com.jy.domain.Device" useGeneratedKeys="true" keyProperty="id">
-    insert into event (id, user_id, udid, isDisable, createtime)
+    insert into device (id, user_id, udid, isDisable, createtime)
     values (
-    	#{id,jdbcType=BIGINT}, #{user_id,jdbcType=VARCHAR}, #{udid,jdbcType=VARCHAR}, 
-    	#{isDisable,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}
+    	#{id,jdbcType=BIGINT}, #{userId,jdbcType=VARCHAR}, #{udid,jdbcType=VARCHAR}, 
+    	#{isDisable,jdbcType=BIT}, #{createtime,jdbcType=TIMESTAMP}
    		)
   </insert>
+  
+   <update id="update" parameterType="com.jy.domain.Device" >
+    update device
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="udid != null" >
+        udid = #{udid,jdbcType=VARCHAR},
+      </if>
+      <if test="isDisable != null" >
+        isDisable = #{isDisable,jdbcType=BIT}
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
 
 </mapper>

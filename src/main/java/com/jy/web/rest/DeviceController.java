@@ -68,7 +68,7 @@ public class DeviceController{
 	}
 	
 	@RequestMapping(value="/disable", method = RequestMethod.POST)
-	public @ResponseBody JsonResponse disableDevice(@PathVariable("eventId") Long eventId, HttpServletRequest request) {
+	public @ResponseBody JsonResponse disableDevice(HttpServletRequest request) {
 		try {
 			String userId = request.getParameter("userId");
 			deviceService.disableDevice(userId);

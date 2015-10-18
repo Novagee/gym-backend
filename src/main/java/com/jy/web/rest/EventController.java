@@ -66,6 +66,8 @@ public class EventController{
 							break;
 						}
 					}
+					List<EventApplicant> eventApplicants = eventService.getByEventId(event.getId());
+					vo.setApplicants(eventApplicants);
 					eventList.add(vo);
 				}
 				return new JsonResponseWithObj(JsonResponseACK.Success.name(), DateUtils.switchNowToString(),eventList);
@@ -109,9 +111,6 @@ public class EventController{
 			String address = request.getParameter("address");
 			String fee = request.getParameter("fee");
 			String pplCount = request.getParameter("pplCount");
-			if (starttime.indexOf(".")!=-1) {
-				starttime = starttime.substring(0, starttime.indexOf("."));
-			}
 			MultipartHttpServletRequest multiRequest = (MultipartHttpServletRequest) request;
 			Map<?, MultipartFile> files = multiRequest.getFileMap();
 			MultipartFile file = null;
@@ -121,7 +120,7 @@ public class EventController{
 					break;
 				}
 			}
-			eventService.createEvent(title, description, Long.parseLong(starttime),address, fee, pplCount, file);
+			eventService.createEvent(title, description, starttime,address, fee, pplCount, file);
 			return new JsonResponse(JsonResponseACK.Success.name(), DateUtils.switchNowToString());
 		} catch (NumberFormatException e) {
 			logger.error(e.getMessage());

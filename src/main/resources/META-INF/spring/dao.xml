@@ -174,4 +174,23 @@
 		</property>
 	</bean>
 	
+	<bean id="deviceDao" parent="abstractDao">
+		<property name="proxyInterfaces">
+			<list>
+				<value>
+					com.jy.dao.DeviceDao
+				</value>
+			</list>
+		</property>
+		<property name="target">
+			<bean parent="abstractDaoTarget">
+				<constructor-arg>
+					<value>
+						com.jy.domain.Device
+					</value>
+				</constructor-arg>
+			</bean>
+		</property>
+	</bean>
+	
 </beans>
