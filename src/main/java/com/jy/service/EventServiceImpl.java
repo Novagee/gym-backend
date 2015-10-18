@@ -67,7 +67,7 @@ public class EventServiceImpl implements EventService{
 			if(null == eventId){
 				throw new InvalidAttributesException("Invalid parameter - eventId"); 
 			}
-			if(null == userId){
+			if(!StringUtils.hasLength(userId)){
 				throw new InvalidAttributesException("Invalid parameter - userId"); 
 			}
 			if(!StringUtils.hasLength(mobile)){

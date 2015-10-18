@@ -14,7 +14,7 @@
     id, user_id, udid, isDisable, createtime
   </sql>
   
-  <select id="getAllDevices" parameterType="java.lang.Long" resultMap="BaseResultMap">d
+  <select id="getAllDevices" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from device
